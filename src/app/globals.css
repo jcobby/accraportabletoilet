@@ -1,0 +1,278 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Registered so it can be interpolated — an unregistered custom property animates
+   discretely, which would make the stat counters jump straight to their final value.
+   Where @property is unsupported that is exactly what happens: correct, just not
+   animated. */
+@property --n {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-display);
+  --color-brand: var(--brand);
+  --color-brand-bright: var(--brand-bright);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-tint: var(--brand-tint);
+  --color-fresh: var(--fresh);
+  --color-sand: var(--sand);
+  --color-turf: var(--turf);
+  --shadow-raise: var(--shadow-raise);
+  --shadow-lift: var(--shadow-lift);
+  --shadow-pop: var(--shadow-pop);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* ---- Brand ----
+     Anchored on the logo: navy wordmark, bright blue "Toilets". `fresh` carries the
+     hygiene/water read, `sand` is the warm counterweight that stops the page going
+     cold-corporate, and `turf` only ever appears inside the illustrations. */
+  --brand: oklch(0.545 0.168 252);
+  --brand-bright: oklch(0.672 0.152 238);
+  --brand-ink: oklch(0.225 0.048 254);
+  --brand-deep: oklch(0.168 0.038 256);
+  --brand-soft: oklch(0.966 0.019 250);
+  --brand-tint: oklch(0.925 0.038 246);
+  --fresh: oklch(0.755 0.113 196);
+  --sand: oklch(0.815 0.104 76);
+  --turf: oklch(0.735 0.132 146);
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.198 0.017 254);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.198 0.017 254);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.198 0.017 254);
+  --primary: oklch(0.545 0.168 252);
+  --primary-foreground: oklch(0.99 0.004 251);
+  --secondary: oklch(0.968 0.009 250);
+  --secondary-foreground: oklch(0.225 0.048 254);
+  --muted: oklch(0.971 0.007 250);
+  --muted-foreground: oklch(0.512 0.026 254);
+  --accent: oklch(0.966 0.019 250);
+  --accent-foreground: oklch(0.225 0.048 254);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.918 0.011 250);
+  --input: oklch(0.905 0.013 250);
+  --ring: oklch(0.545 0.168 252);
+
+  /* ---- Elevation ----
+     Two-part shadows: a tight contact shadow plus a wide, tinted ambient one. The
+     tint is the brand hue rather than black, which keeps cards from going muddy. */
+  --shadow-raise:
+    0 1px 2px oklch(0.225 0.048 254 / 0.06), 0 4px 12px -6px oklch(0.225 0.048 254 / 0.1);
+  --shadow-lift:
+    0 2px 4px oklch(0.225 0.048 254 / 0.06), 0 18px 36px -18px oklch(0.225 0.048 254 / 0.22);
+  --shadow-pop:
+    0 4px 8px oklch(0.225 0.048 254 / 0.07), 0 32px 64px -28px oklch(0.225 0.048 254 / 0.3);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+    /* Sticky header height, so #anchor links do not land under it. */
+    scroll-padding-top: 5.5rem;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading tracking-tight text-balance;
+  }
+}
+
+@layer components {
+  /* Faint grid used behind hero and CTA bands. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, color-mix(in oklch, var(--brand), transparent 92%) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklch, var(--brand), transparent 92%) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  }
+
+  /* Soft coloured light source. Two of these at low opacity give a page depth that
+     flat background colours cannot, without costing an image request. */
+  .bg-glow {
+    background-image:
+      radial-gradient(
+        ellipse 60% 50% at 15% 0%,
+        color-mix(in oklch, var(--brand-bright), transparent 84%),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 50% 45% at 90% 15%,
+        color-mix(in oklch, var(--fresh), transparent 86%),
+        transparent 60%
+      );
+  }
+
+  /* Very fine film grain. Keeps large flat panels from banding and reads as print. */
+  .bg-grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  }
+
+  /* The one place we use gradient type — a single accented phrase per page, no more. */
+  .text-gradient {
+    background-image: linear-gradient(
+      100deg,
+      var(--brand) 10%,
+      var(--brand-bright) 55%,
+      var(--fresh) 95%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Hairline highlight along the top edge — the detail that makes a dark panel read
+     as a lit surface rather than a flat fill. */
+  .edge-light {
+    box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.12);
+  }
+
+  .card-surface {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-raise);
+    transition:
+      box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.28s ease;
+  }
+
+  .card-surface:hover {
+    box-shadow: var(--shadow-lift);
+    border-color: color-mix(in oklch, var(--brand), transparent 72%);
+  }
+}
+
+@layer base {
+  /* Numbers in rate cards and stats line up in columns. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
