@@ -28,7 +28,19 @@ const icons: Record<string, React.ComponentType<{ className?: string }>> = {
   Users,
 };
 
-/** The illustration that best carries each service until photography exists. */
+/** Real photography where it genuinely depicts the service. */
+const servicePhoto: Record<string, { src: string; alt: string }> = {
+  "event-rental": {
+    src: "/images/units/executive-3-door-restroom-trailer/event.jpg",
+    alt: "Guests using an Accra Portable Toilets trailer at an outdoor event",
+  },
+  sales: {
+    src: "/images/units/luxury-2-door-restroom-trailer/street.jpg",
+    alt: "A 2-door restroom trailer delivered and levelled, ready to hand over",
+  },
+};
+
+/** The illustration that carries the rest until photography exists. */
 const serviceArt: Record<string, ArtKey> = {
   "event-rental": "event-night",
   "site-hire": "cubicle-row",
@@ -98,8 +110,10 @@ export default async function ServicesPage() {
 
                     <Media
                       image={{
-                        src: "",
-                        alt: `${service.name} at Accra Portable Toilets`,
+                        src: servicePhoto[service.slug]?.src ?? "",
+                        alt:
+                          servicePhoto[service.slug]?.alt ??
+                          `${service.name} at Accra Portable Toilets`,
                         ratio: "landscape",
                         art: serviceArt[service.slug],
                       }}

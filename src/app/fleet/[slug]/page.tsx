@@ -1,4 +1,4 @@
-import { Check, ChevronRight, CircleAlert, Phone, Users } from "lucide-react";
+import { Check, ChevronRight, CircleAlert, Phone, Play, Users } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Media } from "@/components/media";
 import { Container, Section, SectionHeading } from "@/components/shell";
 import { UnitCard } from "@/components/unit-card";
+import { VideoLoop } from "@/components/video-loop";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { categoryLabels } from "@/data/units";
@@ -102,6 +103,22 @@ export default async function UnitPage(props: PageProps<"/fleet/[slug]">) {
                     />
                   ))}
                 </div>
+              ) : null}
+
+              {unit.video ? (
+                <figure className="overflow-hidden rounded-2xl border bg-card">
+                  <div className="relative aspect-[4/3] bg-brand-ink">
+                    <VideoLoop
+                      src={unit.video.src}
+                      poster={unit.video.poster}
+                      label={unit.video.label}
+                    />
+                  </div>
+                  <figcaption className="flex items-start gap-2.5 p-4 text-sm leading-relaxed text-muted-foreground">
+                    <Play className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden />
+                    {unit.video.caption}
+                  </figcaption>
+                </figure>
               ) : null}
             </div>
 

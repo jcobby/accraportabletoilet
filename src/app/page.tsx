@@ -2,6 +2,7 @@ import {
   ArrowRight,
   BadgeCheck,
   CalendarCheck,
+  Check,
   ClipboardList,
   Droplets,
   Factory,
@@ -25,6 +26,7 @@ import { CountUp, Reveal } from "@/components/reveal";
 import { Container, Eyebrow, Section, SectionHeading } from "@/components/shell";
 import { SizingCalculator } from "@/components/sizing-calculator";
 import { UnitCard } from "@/components/unit-card";
+import { VideoLoop } from "@/components/video-loop";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -193,15 +195,15 @@ export default async function HomePage() {
               </dl>
             </div>
 
-            {/* The night scene leads because it is the shot that sells a trailer, and
-                the two supporting frames show the range either side of it. */}
+            {/* Real units, real sites. The tall frame leads with the detail shot —
+                turf steps, branding and ventilation all in one — because that is what
+                separates these from a plastic cubicle in a visitor's mind. */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <Media
                 image={{
-                  src: "",
-                  alt: "Executive restroom trailer lit up at an evening event",
+                  src: "/images/units/luxury-2-door-restroom-trailer/angle.jpg",
+                  alt: "Accra Portable Toilets 2-door restroom trailer set up on site, turf steps and handrails in place",
                   ratio: "portrait",
-                  art: "event-night",
                 }}
                 className="col-span-2 shadow-lift sm:col-span-1 sm:mt-10"
                 sizes="(min-width: 1024px) 280px, 50vw"
@@ -210,20 +212,18 @@ export default async function HomePage() {
               <div className="grid gap-3 sm:gap-4">
                 <Media
                   image={{
-                    src: "",
-                    alt: "Luxury 2-door trailer on a lawn in daylight",
+                    src: "/images/units/luxury-2-door-restroom-trailer/garden.jpg",
+                    alt: "2-door restroom trailer at a garden event with the door lights on",
                     ratio: "square",
-                    art: "trailer-2",
                   }}
                   className="shadow-raise"
                   sizes="(min-width: 1024px) 280px, 50vw"
                 />
                 <Media
                   image={{
-                    src: "",
-                    alt: "Row of standard portable toilets at an outdoor programme",
+                    src: "/images/units/executive-3-door-restroom-trailer/lawn.jpg",
+                    alt: "Executive 3-door restroom trailer on a lawn at an outdoor event",
                     ratio: "square",
-                    art: "cubicle-row",
                   }}
                   className="shadow-raise"
                   sizes="(min-width: 1024px) 280px, 50vw"
@@ -296,12 +296,65 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((unit, index) => (
               <Reveal key={unit.slug} delay={index * 0.05} className="h-full">
                 <UnitCard unit={unit} className="h-full" />
               </Reveal>
             ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* ---------- Look inside ----------
+          The interior is the whole argument for a trailer over a plastic cubicle, and
+          it is the one thing a photograph of the outside cannot make. */}
+      <Section>
+        <Container>
+          <div className="grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+            <div className="relative mx-auto w-full max-w-xs overflow-hidden rounded-3xl bg-brand-ink shadow-pop lg:max-w-sm">
+              <div className="relative aspect-[29/53]">
+                <VideoLoop
+                  src="/video/trailer-interior.mp4"
+                  poster="/video/trailer-interior-poster.jpg"
+                  label="Walkthrough of a restroom trailer interior — timber-clad walls, ceramic WC, urinal, vanity basin and mirror"
+                />
+              </div>
+            </div>
+
+            <div>
+              <Eyebrow>Look inside</Eyebrow>
+              <h2 className="text-3xl font-bold sm:text-4xl lg:text-[2.6rem] lg:leading-[1.12]">
+                This is what your guests walk into
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+                Timber-clad walls, a ceramic WC, a urinal, a vanity basin with a mirror and an
+                extractor fan overhead. No chemical smell, no plastic box — a room people are
+                happy to be sent to.
+              </p>
+
+              <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+                {[
+                  "Timber-clad interior, not moulded plastic",
+                  "Ceramic WC with foot-pedal flush",
+                  "Vanity basin, mirror and running water",
+                  "Extractor fan and interior lighting",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-sm">
+                    <Check className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden />
+                    <span className="text-muted-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                href="/fleet"
+                className={cn(buttonVariants({ variant: "outline" }), "mt-8 h-11 px-5")}
+              >
+                See the trailers
+                <ArrowRight aria-hidden />
+              </Link>
+            </div>
           </div>
         </Container>
       </Section>

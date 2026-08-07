@@ -39,6 +39,24 @@ export type ArtKey = keyof typeof registry;
 
 export type ArtTone = (typeof registry)[ArtKey]["tone"];
 
+/**
+ * The illustration that represents each unit category.
+ *
+ * Used for small decorative thumbnails — the sizing calculator's result list, for
+ * instance — where a drawing reads better than a photograph shrunk to 56px. Keeping
+ * this keyed by category rather than by an image slot means photographs can replace
+ * gallery images freely without any thumbnail going blank.
+ */
+export const categoryArt = {
+  trailer: "trailer-3",
+  cabin: "cabin",
+  standard: "cubicle",
+  accessible: "accessible",
+  urinal: "urinal",
+  handwash: "handwash",
+  shower: "shower",
+} as const satisfies Record<string, ArtKey>;
+
 export function getArt(key: ArtKey) {
   return registry[key];
 }

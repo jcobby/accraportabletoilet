@@ -137,9 +137,9 @@ export default async function AreaPage(props: PageProps<"/areas/[slug]">) {
           <SectionHeading
             eyebrow="Available here"
             title={`Units we deliver to ${area.city}`}
-            lead="The full fleet travels — these are the four organisers ask for most."
+            lead="The full fleet travels — these are the ones organisers ask for most."
           />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {units.map((unit) => (
               <UnitCard key={unit.slug} unit={unit} className="h-full" />
             ))}

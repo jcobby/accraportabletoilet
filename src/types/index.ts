@@ -43,8 +43,19 @@ export interface Unit {
   requirements: string[];
   pricing: UnitPricing;
   images: GalleryImage[];
+  /** Optional walkthrough clip shown below the gallery on the unit's page. */
+  video?: UnitVideo;
   featured: boolean;
   popular?: boolean;
+}
+
+export interface UnitVideo {
+  src: string;
+  poster: string;
+  /** Accessible description of what the clip shows. */
+  label: string;
+  /** Short caption printed beside the clip. */
+  caption: string;
 }
 
 export interface Service {

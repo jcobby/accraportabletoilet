@@ -4,7 +4,7 @@ import { ArrowRight, Info, Minus, Plus, Users } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
-import { getArt } from "@/components/art";
+import { categoryArt, getArt } from "@/components/art";
 import { buttonVariants } from "@/components/ui/button";
 import { formatCedis } from "@/lib/format";
 import {
@@ -259,8 +259,9 @@ export function SizingCalculator({ units }: { units: Unit[] }) {
             {result.lines.map((line) => {
               const unit = unitBySlug.get(line.slug);
               if (!unit) return null;
-              const art = unit.images[0]?.art;
-              const Art = art ? getArt(art).Art : null;
+              // Keyed off the category, not the gallery, so swapping in photography
+              // never empties these thumbnails.
+              const { Art } = getArt(categoryArt[unit.category]);
 
               return (
                 <li
@@ -268,7 +269,7 @@ export function SizingCalculator({ units }: { units: Unit[] }) {
                   className="edge-light flex items-center gap-4 rounded-2xl bg-white/8 p-3 pr-4 backdrop-blur-sm"
                 >
                   <span className="flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white/90 p-1">
-                    {Art ? <Art /> : null}
+                    <Art />
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="block text-sm font-semibold">

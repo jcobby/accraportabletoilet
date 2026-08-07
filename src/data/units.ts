@@ -63,10 +63,30 @@ export const units: Unit[] = [
       note: "Includes delivery within Accra, set-up, consumables and end-of-event pump-out.",
     },
     images: [
-      { src: "", alt: "Executive 3-door restroom trailer set up on grass at an evening event", ratio: "landscape", art: "event-night" },
-      { src: "", alt: "Interior of a trailer cubicle showing flushing WC, basin and mirror", ratio: "portrait", art: "interior" },
-      { src: "", alt: "Turf-covered entry steps and handrail on the executive trailer", ratio: "square", art: "trailer-3" },
+      {
+        src: "/images/units/executive-3-door-restroom-trailer/lawn.jpg",
+        alt: "Executive 3-door restroom trailer set up on a lawn at an outdoor event",
+        ratio: "landscape",
+      },
+      {
+        src: "/images/units/executive-3-door-restroom-trailer/event.jpg",
+        alt: "Guests stepping up into the executive 3-door trailer at an event",
+        ratio: "portrait",
+      },
+      {
+        src: "/images/units/shared/trailer-interior.jpg",
+        alt: "Inside a restroom trailer — timber-clad walls, ceramic WC, urinal and vanity basin",
+        ratio: "square",
+      },
     ],
+    video: {
+      src: "/video/trailer-interior.mp4",
+      poster: "/video/trailer-interior-poster.jpg",
+      label:
+        "Walkthrough of a restroom trailer interior — timber-clad walls, ceramic WC, urinal, vanity basin and mirror",
+      caption:
+        "A walk through the inside: timber-clad walls, a ceramic WC, urinal, vanity basin and mirror, with an extractor fan overhead.",
+    },
     featured: true,
     popular: true,
   },
@@ -115,9 +135,30 @@ export const units: Unit[] = [
       note: "Includes delivery within Accra, set-up, consumables and end-of-event pump-out.",
     },
     images: [
-      { src: "", alt: "Luxury 2-door restroom trailer parked on a lawn in daylight", ratio: "landscape", art: "trailer-2" },
-      { src: "", alt: "Wash basin and mirror inside the 2-door trailer", ratio: "portrait", art: "interior" },
+      {
+        src: "/images/units/luxury-2-door-restroom-trailer/garden.jpg",
+        alt: "Luxury 2-door restroom trailer set up in a garden compound, lights on above both doors",
+        ratio: "landscape",
+      },
+      {
+        src: "/images/units/luxury-2-door-restroom-trailer/angle.jpg",
+        alt: "Rear corner of the 2-door trailer showing the spare wheel and ventilation units",
+        ratio: "portrait",
+      },
+      {
+        src: "/images/units/luxury-2-door-restroom-trailer/street.jpg",
+        alt: "The 2-door trailer delivered and levelled at the kerbside, turf steps in place",
+        ratio: "square",
+      },
     ],
+    video: {
+      src: "/video/trailer-interior.mp4",
+      poster: "/video/trailer-interior-poster.jpg",
+      label:
+        "Walkthrough of a restroom trailer interior — timber-clad walls, ceramic WC, urinal, vanity basin and mirror",
+      caption:
+        "A walk through the inside: timber-clad walls, a ceramic WC, urinal, vanity basin and mirror, with an extractor fan overhead.",
+    },
     featured: true,
   },
   {
@@ -161,7 +202,10 @@ export const units: Unit[] = [
       { src: "", alt: "White VIP luxury portable toilet cabin standing on open ground at sunset", ratio: "portrait", art: "cabin" },
       { src: "", alt: "Inside the VIP cabin showing WC, basin and mirror", ratio: "portrait", art: "interior" },
     ],
-    featured: true,
+    // TODO:PHOTO — no photograph of a cabin exists yet, so this is held out of the
+    // home-page row rather than showing a drawing next to real photos. Set back to
+    // true the moment one is supplied.
+    featured: false,
   },
   {
     slug: "standard-portable-toilet",
@@ -202,8 +246,24 @@ export const units: Unit[] = [
       note: "Per unit. Rates drop on orders of 5 units and above — ask for the volume rate.",
     },
     images: [
-      { src: "", alt: "Row of standard white portable toilets lined up at an outdoor event", ratio: "landscape", art: "cubicle-row" },
-      { src: "", alt: "Single standard portable toilet unit with door closed", ratio: "portrait", art: "cubicle" },
+      {
+        src: "/images/units/standard-portable-toilet/interior-blue.jpg",
+        alt: "Inside a standard cubicle — flushing WC, corner wash basin and foot pump",
+        ratio: "landscape",
+      },
+      {
+        src: "/images/units/standard-portable-toilet/interior-tan.jpg",
+        alt: "Inside a standard cubicle showing the WC, urinal and hand sanitiser dispenser",
+        ratio: "portrait",
+      },
+      // TODO:PHOTO — still no exterior shot of a cubicle, so the "delivered in banks"
+      // idea is carried by a drawing in the last slot.
+      {
+        src: "",
+        alt: "Row of standard white portable toilets lined up at an outdoor event",
+        ratio: "square",
+        art: "cubicle-row",
+      },
     ],
     featured: true,
     popular: true,

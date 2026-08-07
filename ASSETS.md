@@ -49,26 +49,82 @@ To add one: draw it in `illustrations.tsx` using the shared parts, then register
 `index.tsx`. The `ArtKey` type updates automatically and TypeScript will accept the new
 key in any data file.
 
-## To swap one in
+## To add new photos
 
-1. Drop the file into `public/images/…`. Suggested layout:
+1. Put the original in `photos-inbox/`.
+2. Add a line to `MAP` in `scripts/import-photos.mjs` pointing it at its destination.
+3. Run `npm run photos`.
 
-   ```
-   public/images/units/executive-3-door-restroom-trailer/01.jpg
-   public/images/work/kwahu-business-forum.jpg
-   public/images/about/workshop.jpg
-   ```
+The script honours EXIF rotation, **crops black letterbox bars off screenshots and
+video frames**, caps the long edge at 1800px and re-encodes as progressive JPEG. It
+always works from the originals, so re-running never degrades quality. Originals stay
+in `photos-inbox/`, which is gitignored — they belong in the client's storage, not the
+repo.
 
-2. Set `src` to the path **from the public root**, with a leading slash:
+Then set `src` on the matching entry in `src/data/*` and tighten the `alt` text:
 
-   ```ts
-   { src: "/images/units/executive-3-door-restroom-trailer/01.jpg", alt: "…", ratio: "landscape" }
-   ```
+```ts
+{ src: "/images/units/executive-3-door-restroom-trailer/lawn.jpg", alt: "…", ratio: "landscape" }
+```
 
-3. Tighten the `alt` text so it describes the actual photo.
+`next/image` takes over from there — sizing, lazy loading and format conversion are
+already wired up.
 
-That is the whole change. `next/image` takes over automatically — sizing, lazy
-loading and format conversion are already wired up.
+> **Identify each photo by what is in frame, not by its filename.** The first batch
+> arrived numbered `photo_1`…`photo_7` in an order that did not match how they were
+> sent. Getting it wrong puts a 2-door trailer on the 3-door product page.
+
+## Photos currently in place
+
+| Unit | Shots |
+| --- | --- |
+| Executive 3-door trailer | on a lawn, and in use at an event |
+| Luxury 2-door trailer | garden compound, rear corner, kerbside — no illustration left |
+| Standard cubicle | two interiors (blue and tan units) |
+
+## Video
+
+`public/video/trailer-interior.mp4` — a 4.8s silent walkthrough of a trailer interior,
+shown on the home page and on both trailer product pages via `VideoLoop`
+(`src/components/video-loop.tsx`).
+
+It was encoded from the phone original with:
+
+```bash
+ffmpeg -i original.MP4 -an -vcodec libx264 -profile:v main -crf 28 -preset slow \
+  -pix_fmt yuv420p -movflags +faststart -y public/video/trailer-interior.mp4
+ffmpeg -ss 2.2 -i original.MP4 -frames:v 1 -q:v 3 -y public/video/trailer-interior-poster.jpg
+```
+
+`ffmpeg` is available as a devDependency — `node -e "console.log(require('ffmpeg-static'))"`
+prints the binary path.
+
+That took 1,035KB → 304KB. The flags matter:
+
+- `-an` strips the audio track. The clip is a silent walkthrough and autoplay requires
+  muted anyway, so the audio was pure waste.
+- `-movflags +faststart` moves the index to the front of the file so playback can begin
+  before the whole thing has downloaded.
+- A poster frame is always supplied, and `preload="none"` means nothing is fetched
+  until playback starts — a visitor who scrolls past pays nothing.
+
+To add another clip, follow the same recipe and pass `src`/`poster` to `VideoLoop`, or
+set the optional `video` field on a unit in `src/data/units.ts` to have it appear under
+that unit's gallery automatically.
+
+## Still needed
+
+1. **Confirmation of which trailer the interior clip shows.** It is currently captioned
+   neutrally ("a restroom trailer") and used on both trailer pages, because nobody has
+   confirmed whether it is the 3-door or the 2-door. Once known, tighten the copy — or
+   split it if the two interiors differ.
+2. **An exterior of a standard cubicle** — both cubicle photos are interiors, so the
+   product card still uses a drawing.
+3. VIP cabin, accessible unit, urinal station, hand-washing station, shower unit.
+4. Workshop mid-build — this backs the "we manufacture our own" claim, which is the
+   business's real differentiator.
+
+Slots without a photograph keep their illustration, so nothing ever renders empty.
 
 ## Where the image lists live
 

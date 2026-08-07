@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Photo originals — large, and they live in the client's storage, not here.
+/photos-inbox/*
+!/photos-inbox/README.md
