@@ -91,8 +91,13 @@ export default function RootLayout({
           Skip to content
         </a>
         <SiteHeader />
-        {/* Bottom padding clears the fixed mobile action bar. */}
-        <main id="main" className="flex-1 pb-20 md:pb-0">
+        {/* Clears the fixed mobile action bar. The bar's own height plus the device
+            safe-area inset — a flat rem value leaves the last element under the bar
+            on notched phones. */}
+        <main
+          id="main"
+          className="flex-1 pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-0"
+        >
           {children}
         </main>
         <SiteFooter />

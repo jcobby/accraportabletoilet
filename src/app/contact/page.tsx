@@ -1,4 +1,4 @@
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, MapPin, Phone } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -46,7 +46,7 @@ export default async function ContactPage() {
 
       <Section>
         <Container>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2">
             <a
               href={site.phone.href}
               className="group flex flex-col rounded-2xl border bg-card p-6 transition-shadow hover:shadow-lg hover:shadow-brand/5"
@@ -81,21 +81,6 @@ export default async function ContactPage() {
               </span>
             </a>
 
-            <a
-              href={`mailto:${site.email}`}
-              className="group flex flex-col rounded-2xl border bg-card p-6 transition-shadow hover:shadow-lg hover:shadow-brand/5"
-            >
-              <span className="flex size-11 items-center justify-center rounded-xl bg-brand-soft text-brand">
-                <Mail className="size-5" aria-hidden />
-              </span>
-              <h2 className="mt-4 font-heading text-base font-bold">Email</h2>
-              <p className="mt-1 flex-1 text-sm text-muted-foreground">
-                Best for procurement, invoices and formal quotations.
-              </p>
-              <span className="mt-4 break-all font-heading text-sm font-bold text-brand">
-                {site.email}
-              </span>
-            </a>
           </div>
 
           <div className="mt-8 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
@@ -106,8 +91,8 @@ export default async function ContactPage() {
               </h2>
               <p className="mt-3 max-w-xl text-base leading-relaxed text-brand-ink/70">
                 It walks through the event, the units, the location and how to reach you — then
-                hands the whole summary straight to us on WhatsApp or by email, whichever you
-                prefer. Nothing is stored on this website.
+                hands the whole summary straight to us on WhatsApp. Nothing is stored on this
+                website.
               </p>
               <Link
                 href="/quote"
@@ -148,7 +133,7 @@ export default async function ContactPage() {
                     rel="noopener noreferrer"
                     className="text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
                   >
-                    @accraportabletoilets
+                    {site.social.instagramHandle}
                   </a>
                 </li>
               </ul>

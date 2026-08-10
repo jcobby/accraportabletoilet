@@ -14,7 +14,14 @@ export const eventTypes = [
   "Other",
 ] as const;
 
-export const contactMethods = ["WhatsApp", "Phone call", "Email"] as const;
+/**
+ * How the visitor would rather be reached. This is not how the request is *sent* —
+ * every submission goes out over WhatsApp — it just tells us how to reply.
+ *
+ * "Email" was removed with the business email address: offering to reply by email
+ * when there is no inbox to reply from would be a promise the business cannot keep.
+ */
+export const contactMethods = ["WhatsApp", "Phone call"] as const;
 
 export const extras = [
   { id: "attendant", label: "On-site attendant", hint: "Keeps units clean and stocked all day" },

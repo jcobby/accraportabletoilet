@@ -19,7 +19,8 @@ import Link from "next/link";
 
 import { CtaBand } from "@/components/cta-band";
 import { FaqList } from "@/components/faq-list";
-import { WhatsAppIcon } from "@/components/icons";
+import { InstagramIcon, WhatsAppIcon } from "@/components/icons";
+import { InstagramCta } from "@/components/instagram-cta";
 import { JsonLd } from "@/components/json-ld";
 import { Media } from "@/components/media";
 import { CountUp, Reveal } from "@/components/reveal";
@@ -195,21 +196,25 @@ export default async function HomePage() {
               </dl>
             </div>
 
-            {/* Real units, real sites. The tall frame leads with the detail shot —
-                turf steps, branding and ventilation all in one — because that is what
-                separates these from a plastic cubicle in a visitor's mind. */}
+            {/* Real units, real sites.
+
+                The lead frame is portrait beside the copy on desktop, but full-bleed
+                on a phone that runs to roughly 790px tall and buries everything below
+                it — so it drops to 4:3 on small screens. */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <Media
                 image={{
-                  src: "/images/units/luxury-2-door-restroom-trailer/angle.jpg",
-                  alt: "Accra Portable Toilets 2-door restroom trailer set up on site, turf steps and handrails in place",
+                  src: "/images/units/executive-3-door-restroom-trailer/lawn.jpg",
+                  alt: "Executive 3-door restroom trailer set up on a lawn at an outdoor event",
                   ratio: "portrait",
                 }}
-                className="col-span-2 shadow-lift sm:col-span-1 sm:mt-10"
-                sizes="(min-width: 1024px) 280px, 50vw"
+                className="col-span-2 aspect-4/3 shadow-lift sm:col-span-1 sm:mt-10 sm:aspect-3/4"
+                sizes="(min-width: 640px) 280px, 100vw"
                 priority
               />
-              <div className="grid gap-3 sm:gap-4">
+              {/* Without col-span-2 this sits in one column of the two-column grid on
+                  phones, leaving a dead gutter beside it. */}
+              <div className="col-span-2 grid grid-cols-2 gap-3 sm:col-span-1 sm:grid-cols-1 sm:gap-4">
                 <Media
                   image={{
                     src: "/images/units/luxury-2-door-restroom-trailer/garden.jpg",
@@ -221,8 +226,8 @@ export default async function HomePage() {
                 />
                 <Media
                   image={{
-                    src: "/images/units/executive-3-door-restroom-trailer/lawn.jpg",
-                    alt: "Executive 3-door restroom trailer on a lawn at an outdoor event",
+                    src: "/images/units/luxury-2-door-restroom-trailer/angle.jpg",
+                    alt: "2-door restroom trailer on site, turf steps and handrails in place",
                     ratio: "square",
                   }}
                   className="shadow-raise"
@@ -312,8 +317,10 @@ export default async function HomePage() {
       <Section>
         <Container>
           <div className="grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-            <div className="relative mx-auto w-full max-w-xs overflow-hidden rounded-3xl bg-brand-ink shadow-pop lg:max-w-sm">
-              <div className="relative aspect-[29/53]">
+            {/* Capped tighter on phones — at 20rem this vertical clip runs nearly
+                600px tall and swallows the whole screen. */}
+            <div className="relative mx-auto w-full max-w-60 overflow-hidden rounded-3xl bg-brand-ink shadow-pop sm:max-w-xs lg:max-w-sm">
+              <div className="relative aspect-29/53">
                 <VideoLoop
                   src="/video/trailer-interior.mp4"
                   poster="/video/trailer-interior-poster.jpg"
@@ -347,13 +354,24 @@ export default async function HomePage() {
                 ))}
               </ul>
 
-              <Link
-                href="/fleet"
-                className={cn(buttonVariants({ variant: "outline" }), "mt-8 h-11 px-5")}
-              >
-                See the trailers
-                <ArrowRight aria-hidden />
-              </Link>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Link
+                  href="/fleet"
+                  className={cn(buttonVariants({ variant: "outline" }), "h-11 px-5")}
+                >
+                  See the trailers
+                  <ArrowRight aria-hidden />
+                </Link>
+                <a
+                  href={site.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(buttonVariants({ variant: "ghost" }), "h-11 px-4 text-brand")}
+                >
+                  <InstagramIcon className="size-4" />
+                  More on Instagram
+                </a>
+              </div>
             </div>
           </div>
         </Container>
@@ -437,7 +455,7 @@ export default async function HomePage() {
               lead="Weddings and funerals, marathons and business forums, construction sites and state grounds."
             />
             <Link href="/gallery" className={cn(buttonVariants({ variant: "outline" }), "h-11 px-5")}>
-              See more past work
+              See the gallery
               <ArrowRight aria-hidden />
             </Link>
           </div>
@@ -471,6 +489,13 @@ export default async function HomePage() {
         </Container>
       </Section>
       ) : null}
+
+      {/* ---------- Instagram ---------- */}
+      <Section className="pt-0">
+        <Container className="max-w-3xl">
+          <InstagramCta />
+        </Container>
+      </Section>
 
       {/* ---------- Coverage ---------- */}
       <Section tone="muted">

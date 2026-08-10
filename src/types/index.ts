@@ -95,6 +95,16 @@ export interface Deployment {
   verified: boolean;
 }
 
+export type GalleryCategory = "trailers" | "interiors" | "on-site" | "servicing";
+
+export interface GalleryPhoto {
+  src: string;
+  alt: string;
+  category: GalleryCategory;
+  /** Optional line shown under the photo in the lightbox and on hover. */
+  caption?: string;
+}
+
 export interface Faq {
   question: string;
   answer: string;

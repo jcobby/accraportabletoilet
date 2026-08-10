@@ -169,6 +169,9 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Safety net against sideways scroll on phones. `clip` rather than `hidden`
+       because `hidden` on body silently breaks position: sticky on the header. */
+    overflow-x: clip;
   }
   html {
     @apply font-sans;

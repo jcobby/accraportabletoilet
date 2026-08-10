@@ -1,4 +1,4 @@
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 
 import { InstagramIcon } from "@/components/icons";
@@ -31,15 +31,6 @@ export function SiteFooter() {
                   {site.phone.display}
                 </a>
               </li>
-              <li>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="inline-flex items-center gap-2.5 transition-colors hover:text-white/70"
-                >
-                  <Mail className="size-4 shrink-0 text-white/40" aria-hidden />
-                  {site.email}
-                </a>
-              </li>
               <li className="inline-flex items-center gap-2.5 text-white/70">
                 <MapPin className="size-4 shrink-0 text-white/40" aria-hidden />
                 {site.address.city}, {site.address.region}
@@ -52,7 +43,7 @@ export function SiteFooter() {
                   className="inline-flex items-center gap-2.5 transition-colors hover:text-white/70"
                 >
                   <InstagramIcon className="size-4 shrink-0 text-white/40" />
-                  @accraportabletoilets
+                  {site.social.instagramHandle}
                 </a>
               </li>
             </ul>

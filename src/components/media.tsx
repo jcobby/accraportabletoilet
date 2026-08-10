@@ -7,8 +7,8 @@ import type { GalleryImage } from "@/types";
 
 const ratioClass = {
   square: "aspect-square",
-  landscape: "aspect-[4/3]",
-  portrait: "aspect-[3/4]",
+  landscape: "aspect-4/3",
+  portrait: "aspect-3/4",
 } as const;
 
 /**

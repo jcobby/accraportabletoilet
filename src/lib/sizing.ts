@@ -55,7 +55,6 @@ export const SLUGS = {
   cubicle: "standard-portable-toilet",
   trailer3: "executive-3-door-restroom-trailer",
   trailer2: "luxury-2-door-restroom-trailer",
-  accessible: "accessible-unit",
   urinal: "four-bay-urinal-station",
   handwash: "hand-washing-station",
 } as const;
@@ -76,10 +75,7 @@ export function sizeEvent({
   // cubicle, so it buys back roughly one cubicle of capacity each.
   const urinals = Math.floor(effectiveGuests / 500);
   const rawCubicles = Math.ceil(effectiveGuests / 75);
-  let cubicles = Math.max(1, rawCubicles - urinals);
-
-  const accessible = safeGuests >= 100 ? Math.max(1, Math.round(safeGuests / 800)) : 0;
-  cubicles = Math.max(1, cubicles - accessible);
+  const cubicles = Math.max(1, rawCubicles - urinals);
 
   const lines: SizingLine[] = [];
   const notes: string[] = [];
@@ -140,18 +136,13 @@ export function sizeEvent({
     });
   }
 
-  if (accessible > 0) {
-    lines.push({
-      slug: SLUGS.accessible,
-      count: accessible,
-      reason: "Step-free access for wheelchair users, elderly and pregnant guests",
-    });
-  }
-
   if (catering) {
+    // Driven by headcount rather than by the cubicle count, so changing the cubicle
+    // mix does not move the hand-washing figure as a side effect. Each station has
+    // two taps; roughly one basin per 125 guests at a catered event.
     lines.push({
       slug: SLUGS.handwash,
-      count: Math.max(1, Math.ceil(cubicles / 3)),
+      count: Math.max(1, Math.ceil(effectiveGuests / 250)),
       reason: "Running water where food is served",
     });
   }

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { WhatsAppIcon } from "@/components/icons";
+import { InstagramCta } from "@/components/instagram-cta";
 import { JsonLd } from "@/components/json-ld";
 import { Media } from "@/components/media";
 import { Container, Section, SectionHeading } from "@/components/shell";
@@ -107,7 +108,7 @@ export default async function UnitPage(props: PageProps<"/fleet/[slug]">) {
 
               {unit.video ? (
                 <figure className="overflow-hidden rounded-2xl border bg-card">
-                  <div className="relative aspect-[4/3] bg-brand-ink">
+                  <div className="relative aspect-4/3 bg-brand-ink">
                     <VideoLoop
                       src={unit.video.src}
                       poster={unit.video.poster}
@@ -120,6 +121,8 @@ export default async function UnitPage(props: PageProps<"/fleet/[slug]">) {
                   </figcaption>
                 </figure>
               ) : null}
+
+              <InstagramCta variant="inline" />
             </div>
 
             {/* Summary + pricing */}
@@ -257,9 +260,14 @@ export default async function UnitPage(props: PageProps<"/fleet/[slug]">) {
                 <h3 className="font-heading text-base font-bold">Specifications</h3>
                 <dl className="mt-4 divide-y text-sm">
                   {unit.specs.map((spec) => (
-                    <div key={spec.label} className="flex justify-between gap-6 py-2.5">
+                    <div
+                      key={spec.label}
+                      // Stacked on phones: side-by-side leaves values like
+                      // "230V 13A supply or generator" wrapping to four words a line.
+                      className="flex flex-col gap-0.5 py-2.5 sm:flex-row sm:justify-between sm:gap-4"
+                    >
                       <dt className="text-muted-foreground">{spec.label}</dt>
-                      <dd className="text-right font-medium">{spec.value}</dd>
+                      <dd className="font-medium sm:text-right">{spec.value}</dd>
                     </div>
                   ))}
                 </dl>

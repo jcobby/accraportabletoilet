@@ -8,7 +8,6 @@ import {
   Check,
   CircleHelp,
   Copy,
-  Mail,
   MapPin,
   PackageCheck,
   UserRound,
@@ -43,7 +42,7 @@ import {
   quoteSchema,
   type QuoteValues,
 } from "@/lib/quote";
-import { site, whatsappLink } from "@/lib/site";
+import { whatsappLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import type { Unit } from "@/types";
 
@@ -143,18 +142,7 @@ export function QuoteForm({
   function onSubmit(values: QuoteValues) {
     const message = buildQuoteMessage(values, unitNameFor);
     setSubmitted(message);
-
-    if (values.contactMethod === "Email") {
-      const subject = encodeURIComponent(
-        `Quote request — ${values.eventType}, ${values.eventDate}`,
-      );
-      window.location.assign(
-        `mailto:${site.email}?subject=${subject}&body=${encodeURIComponent(message)}`,
-      );
-    } else {
-      window.open(whatsappLink(message), "_blank", "noopener,noreferrer");
-    }
-
+    window.open(whatsappLink(message), "_blank", "noopener,noreferrer");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -167,9 +155,8 @@ export function QuoteForm({
         </span>
         <h2 className="mt-5 font-heading text-2xl font-bold">Your request is ready to send</h2>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-          {contactMethod === "Email"
-            ? "Your email app should have opened with everything filled in. If it did not, copy the summary below and send it to us."
-            : "WhatsApp should have opened with your details filled in — press send and we will take it from there. If nothing opened, copy the summary below."}
+          WhatsApp should have opened with your details filled in — press send and we will take it
+          from there. If nothing opened, copy the summary below.
         </p>
 
         <pre className="mt-6 overflow-x-auto rounded-xl border bg-secondary/60 p-5 text-left font-mono text-xs leading-relaxed whitespace-pre-wrap text-foreground">
@@ -475,7 +462,7 @@ export function QuoteForm({
               </div>
 
               <div className="sm:col-span-2">
-                <Label htmlFor="email">Email (optional)</Label>
+                <Label htmlFor="email">Your email (optional)</Label>
                 <Input id="email" type="email" className="mt-2 h-11" {...register("email")} />
                 <FieldError message={errors.email?.message} />
               </div>
@@ -523,9 +510,8 @@ export function QuoteForm({
             </div>
 
             <p className="mt-6 rounded-xl bg-secondary/60 p-4 text-xs leading-relaxed text-muted-foreground">
-              Pressing send opens{" "}
-              {contactMethod === "Email" ? "your email app" : "WhatsApp"} with this summary filled
-              in — you stay in control of the message. Nothing is stored on this website.
+              Pressing send opens WhatsApp with this summary filled in — you stay in control of the
+              message. Nothing is stored on this website.
             </p>
           </fieldset>
         ) : null}
@@ -550,11 +536,7 @@ export function QuoteForm({
             </Button>
           ) : (
             <Button type="submit" className="h-11 px-6 text-sm font-semibold">
-              {contactMethod === "Email" ? (
-                <Mail aria-hidden />
-              ) : (
-                <WhatsAppIcon className="size-4" />
-              )}
+              <WhatsAppIcon className="size-4" />
               Send my request
             </Button>
           )}

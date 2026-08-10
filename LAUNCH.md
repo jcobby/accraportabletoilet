@@ -12,14 +12,17 @@ What follows is what to unblock, in priority order.
 These are wrong or unknown right now. The site works without them; it is just less
 useful until they land.
 
-### The enquiry email address — **highest priority**
+### An enquiry email address — optional, but a real gap
 
-`src/lib/site.ts` → `email: "info@accraportabletoilet.com"` is **a guess**. If a
-visitor picks "Email" as their contact preference on the quote form, their enquiry is
-sent to that address. If the mailbox does not exist, **the enquiry is lost silently**.
+There is **no email address on the site**. The invented `info@` placeholder has been
+removed everywhere: the footer line, the Email card on /contact, the "Email" option in
+the quote form, and the `email` field in the structured data.
 
-Get the real address and replace it. It updates the footer, contact page, quote form
-and structured data in one edit.
+That is the safe state — an address nobody reads loses enquiries in silence. But it
+does mean the business is reachable only by phone, WhatsApp and the quote form, and
+some corporate and government buyers will only send a purchase order by email.
+
+If he sets up a real inbox, `src/lib/site.ts` documents exactly what to restore.
 
 ### The rate card
 
@@ -97,8 +100,9 @@ addresses — the single most common launch mistake.
 ## 4. Known limitation to tell the owner about
 
 **Quote requests are not stored anywhere.** The form composes a summary and opens the
-visitor's own WhatsApp or email app — *the visitor still has to press send*. If they
-close the tab, the enquiry is gone and there is no record it ever existed.
+visitor's own WhatsApp — *the visitor still has to press send*. If they close the tab,
+the enquiry is gone and there is no record it ever existed. With no email address on
+the site either, WhatsApp is now the only route a written enquiry can take.
 
 That was the agreed scope (no backend). If he wants every enquiry captured whether or
 not the visitor completes the hand-off, that needs a form service or a small backend

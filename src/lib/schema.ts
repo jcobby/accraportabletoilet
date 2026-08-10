@@ -12,7 +12,6 @@ export function organisationSchema() {
     url: site.url,
     description: site.description,
     telephone: site.phone.intl,
-    email: site.email,
     address: {
       "@type": "PostalAddress",
       addressLocality: site.address.city,
@@ -32,7 +31,6 @@ export function localBusinessSchema() {
     image: `${site.url}/opengraph-image`,
     url: site.url,
     telephone: site.phone.intl,
-    email: site.email,
     // schema.org expects the symbolic form here, not a figure.
     priceRange: "$$",
     parentOrganization: { "@id": ORG_ID },

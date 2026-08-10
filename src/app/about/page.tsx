@@ -2,6 +2,7 @@ import { Factory, Recycle, ShieldCheck, Truck } from "lucide-react";
 import type { Metadata } from "next";
 
 import { CtaBand } from "@/components/cta-band";
+import { InstagramCta } from "@/components/instagram-cta";
 import { JsonLd } from "@/components/json-ld";
 import { Media } from "@/components/media";
 import { PageHero } from "@/components/page-hero";
@@ -105,25 +106,25 @@ export default function AboutPage() {
               <div className="grid grid-cols-2 gap-4">
                 <Media
                   image={{
-                    src: "",
-                    alt: "Crew delivering units to an event ground",
+                    src: "/images/gallery/delivery-flatbed.jpg",
+                    alt: "A unit being delivered by flatbed truck on an upcountry road",
                     ratio: "square",
-                    art: "delivery",
                   }}
                   className="shadow-raise"
                   sizes="(min-width: 1024px) 220px, 50vw"
                 />
                 <Media
                   image={{
-                    src: "",
-                    alt: "Finished trailer interior ready for handover",
+                    src: "/images/gallery/interior-mirror-wc.jpg",
+                    alt: "Finished trailer interior — timber cladding, round mirror and vanity basin",
                     ratio: "square",
-                    art: "interior",
                   }}
                   className="shadow-raise"
                   sizes="(min-width: 1024px) 220px, 50vw"
                 />
               </div>
+
+              <InstagramCta variant="inline" />
             </div>
           </div>
         </Container>

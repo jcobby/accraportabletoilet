@@ -22,8 +22,14 @@ export const site = {
   },
   /** Digits only, international format — used to build wa.me links. */
   whatsapp: "233558045600",
-  // TODO:VERIFY — replace with the real inbox before launch.
-  email: "info@accraportabletoilet.com",
+
+  // NO EMAIL ADDRESS. The business has not supplied one, so the site does not show
+  // or accept email anywhere: an address nobody reads loses enquiries silently,
+  // which is worse than not offering the channel at all.
+  //
+  // To add one later: put `email: "..."` back here, then restore the Email contact
+  // card on /contact, the footer line, "Email" in `contactMethods` (src/lib/quote.ts)
+  // and its branch in the quote form, plus the `email` field in src/lib/schema.ts.
 
   address: {
     street: "", // TODO:VERIFY — yard / office address
@@ -42,7 +48,10 @@ export const site = {
   ],
 
   social: {
-    instagram: "https://www.instagram.com/accraportabletoilets/",
+    // Confirmed by the owner. The `?igsh=` token on a shared Instagram link is a
+    // per-share tracking identifier, not part of the profile address — stripped.
+    instagram: "https://www.instagram.com/accraportabletoilets",
+    instagramHandle: "@accraportabletoilets",
     // TODO:VERIFY — add the real handles when confirmed.
     facebook: "",
     tiktok: "",

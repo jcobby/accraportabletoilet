@@ -74,6 +74,33 @@ already wired up.
 > arrived numbered `photo_1`…`photo_7` in an order that did not match how they were
 > sent. Getting it wrong puts a 2-door trailer on the 3-door product page.
 
+## The gallery
+
+`/gallery` is driven by `src/data/gallery.ts` and rendered by `GalleryGrid`
+(`src/components/gallery-grid.tsx`) — a CSS-columns masonry with category filters and
+a keyboard-navigable lightbox.
+
+Two things to know before editing that data file:
+
+- **Order matters.** The masonry lays photos out in source order, so the list is
+  deliberately interleaved across categories. Grouping by category stacks five timber
+  interiors down one column and the "Everything" view goes brown on one side.
+  Filtering reads each item's `category`, so interleaving costs nothing.
+- **Columns, not grid.** The photos are a mix of portrait, landscape and near-square.
+  A fixed grid would centre-crop most of them; columns let every frame keep its true
+  proportions.
+
+Adding a photo is one entry — `src`, `alt`, `category`, optional `caption`.
+
+## Deliberately not published
+
+| File | Why |
+| --- | --- |
+| `gallery/trailer-front-marquee.jpg` | The unit's livery reads **059 632 5186** and **accraportabletoilets.com** (plural). Every other unit, and this site, uses **0558 045 600** and **accraportabletoilet.com** (singular). Restore the entry in `gallery.ts` once the owner confirms whether that number is also his. |
+| `photo_2026-08-10_09-55-05.jpg` | The company vision graphic — a text card, not a photograph. Its wording would sit better on the About page than in a photo gallery. |
+| `~/Downloads/cert.jpg` | Looks like a business certificate. Not used: certificates often carry registration and tax numbers that should not be published without the owner explicitly asking. |
+| Three `video_2026-08-10_*.mp4` | Not yet reviewed or encoded. The largest is 10MB and would need the same treatment as `trailer-interior.mp4`. |
+
 ## Photos currently in place
 
 | Unit | Shots |
@@ -111,6 +138,25 @@ That took 1,035KB → 304KB. The flags matter:
 To add another clip, follow the same recipe and pass `src`/`poster` to `VideoLoop`, or
 set the optional `video` field on a unit in `src/data/units.ts` to have it appear under
 that unit's gallery automatically.
+
+## Illustrations still in use
+
+Only where no photograph exists. Supply one of these and the drawing goes:
+
+| Where | What would replace it |
+| --- | --- |
+| VIP Luxury Cabin (2 slots, `units.ts`) | Exterior and interior of a standalone cabin |
+| Accessible (PWD) Unit | The unit with its ramp |
+| 4-Bay Urinal Station | The station in use |
+| Hand-Washing Station | The twin-basin stand |
+| Portable Shower Unit | Exterior or the shower inside |
+| Standard cubicle, card slot | An **exterior** cubicle shot — both photos we have are interiors |
+| About page, "workshop" | Fabrication in progress |
+| CTA band background | Decorative by design; not a stand-in, leave it |
+
+> The site-installation video shows a white cabin, but it is a permanent commercial
+> install with a bio-digester — a different product from the portable VIP cabin. Do
+> not pull a still from it to fill that slot; it would misrepresent what is hired.
 
 ## Still needed
 

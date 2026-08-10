@@ -1,10 +1,11 @@
 import { areas } from "@/data/areas";
 import { deployments } from "@/data/deployments";
 import { faqs } from "@/data/faqs";
+import { galleryPhotos } from "@/data/gallery";
 import { services } from "@/data/services";
 import { units } from "@/data/units";
 import { PRICING_CONFIRMED } from "@/lib/site";
-import type { Deployment, Faq, Service, ServiceArea, Unit } from "@/types";
+import type { Deployment, Faq, GalleryPhoto, Service, ServiceArea, Unit } from "@/types";
 
 /**
  * Every read the UI performs goes through this module — pages never import from
@@ -72,6 +73,10 @@ export async function getService(slug: string): Promise<Service | null> {
 /** Only jobs the owner has confirmed. See the warning in src/data/deployments.ts. */
 export async function getDeployments(): Promise<Deployment[]> {
   return deployments.filter((deployment) => deployment.verified);
+}
+
+export async function getGalleryPhotos(): Promise<GalleryPhoto[]> {
+  return galleryPhotos;
 }
 
 export async function getFaqs(limit?: number): Promise<Faq[]> {

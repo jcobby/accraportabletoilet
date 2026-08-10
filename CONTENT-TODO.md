@@ -14,7 +14,7 @@ launch any more — but each item should still be confirmed with the business ow
 | --- | --- | --- |
 | `phone` | 0558 045 600 / +233 55 804 5600 | From the public Instagram bio — confirm it is still the booking line |
 | `url` | https://www.accraportabletoilet.com | From the Instagram bio |
-| `email` | info@accraportabletoilet.com | **Guessed.** Replace with the real inbox |
+| `email` | *(removed)* | No address on the site at all — see LAUNCH.md |
 | `address.street` | *(empty)* | **Missing.** Add the yard/office address, or delete the field and keep the site city-level |
 | `geo` | Accra city centre | **Placeholder.** Replace with the real yard coordinates so Google Maps and the LocalBusiness schema are accurate |
 | `hours` | Mon–Fri 7–6, Sat 8–5, Sun standby | **Assumed.** Confirm |

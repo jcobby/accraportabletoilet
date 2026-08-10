@@ -42,6 +42,22 @@ const MAP = {
   // standard cubicle interiors — these are moulded plastic units, NOT trailer interiors
   "photo_7_2026-08-07_08-57-11.jpg": "units/standard-portable-toilet/interior-blue.jpg",
   "photo_2_2026-08-07_08-57-11.jpg": "units/standard-portable-toilet/interior-tan.jpg",
+
+  // ---- second batch, 10 Aug — the gallery set ----
+  "photo_2026-08-10_09-53-45.jpg": "gallery/trailer-roadside.jpg",
+  "photo_2026-08-10_09-53-54.jpg": "gallery/trailer-front-marquee.jpg",
+  "photo_2026-08-10_09-54-00.jpg": "gallery/trailer-rear-angle.jpg",
+  "photo_2026-08-10_09-54-05.jpg": "gallery/trailer-under-tree.jpg",
+  "photo_2026-08-10_09-54-11.jpg": "gallery/fleet-row-pavilion.jpg",
+  "photo_2026-08-10_09-54-18.jpg": "gallery/trailer-on-grass.jpg",
+  "photo_2026-08-10_09-54-25.jpg": "gallery/interior-vanity-urinal.jpg",
+  "photo_2026-08-10_09-54-30.jpg": "gallery/interior-mirror-wc.jpg",
+  "photo_2026-08-10_09-54-37.jpg": "gallery/trailer-side-closed.jpg",
+  "photo_2026-08-10_09-54-42.jpg": "gallery/delivery-flatbed.jpg",
+  "photo_2026-08-10_09-54-48.jpg": "gallery/fleet-row-grass.jpg",
+  "photo_2026-08-10_09-54-54.jpg": "gallery/vacuum-tanker.jpg",
+  // photo_2026-08-10_09-55-05.jpg is the company vision graphic, not a photograph —
+  // deliberately left out of the gallery. See ASSETS.md.
 };
 
 /**

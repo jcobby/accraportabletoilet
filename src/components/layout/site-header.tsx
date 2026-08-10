@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-import { WhatsAppIcon } from "@/components/icons";
+import { InstagramIcon, WhatsAppIcon } from "@/components/icons";
 import { Logo } from "@/components/logo";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -50,6 +50,15 @@ export function SiteHeader() {
             >
               <WhatsAppIcon className="size-3.5" />
               WhatsApp us
+            </a>
+            <a
+              href={site.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-medium transition-colors hover:text-white/70"
+            >
+              <InstagramIcon className="size-3.5" />
+              More photos &amp; video
             </a>
           </div>
         </div>
