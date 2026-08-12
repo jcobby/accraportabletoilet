@@ -53,11 +53,6 @@ const serviceIcons: Record<string, React.ComponentType<{ className?: string }>> 
 
 const promises = [
   {
-    icon: Factory,
-    title: "We build what we hire out",
-    body: "Every trailer and cabin is fabricated in our own workshop. That means we can modify, repair and customise without waiting on an importer — and spares are always available.",
-  },
-  {
     icon: Sparkles,
     title: "Delivered clean, kept clean",
     body: "Units arrive deep-cleaned and stocked with tissue, soap and sanitiser. On longer programmes our crew comes back mid-event, so the last guest sees what the first one saw.",
@@ -263,19 +258,20 @@ export default async function HomePage() {
             lead="Nobody compliments a clean toilet. They only ever mention the bad one. Everything below exists so yours never comes up."
           />
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          {/* Three across, and the icon sits above the text rather than beside it —
+              at a third of the width there is no room for a side-by-side layout, and
+              this matches the service cards further down the page. */}
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
             {promises.map((promise, index) => (
               <Reveal key={promise.title} delay={index * 0.06} className="h-full">
-                <div className="flex h-full gap-4 rounded-2xl border bg-card p-6">
+                <div className="card-surface flex h-full flex-col rounded-2xl p-6">
                   <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand-soft text-brand">
                     <promise.icon className="size-5" aria-hidden />
                   </span>
-                  <div>
-                    <h3 className="font-heading text-base font-bold">{promise.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      {promise.body}
-                    </p>
-                  </div>
+                  <h3 className="mt-4 font-heading text-base font-bold">{promise.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {promise.body}
+                  </p>
                 </div>
               </Reveal>
             ))}
